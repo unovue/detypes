@@ -170,7 +170,7 @@ function printUsage() {
 
 const USAGE = `Usage:
 
-  detype [-m | --remove-magic-comments] <INPUT> [OUTPUT]
+  detypes [-m | --remove-magic-comments] <INPUT> [OUTPUT]
 
     INPUT   Input file or directory
 
@@ -183,11 +183,11 @@ const USAGE = `Usage:
     -m, --remove-magic-comments
       Remove magic comments only, don't perform ts > js transform
 
-  detype [-v | --version]
+  detypes [-v | --version]
 
     Print version and exit
 
-  detype [-h | --help]
+  detypes [-h | --help]
 
     Print this help and exit`;
 

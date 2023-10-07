@@ -1,12 +1,12 @@
-# detype
+# detypes
 
 > Remove the types, keep the formatting
 
 ```sh
-npm i -g detype
+npm i -g detypes
 ```
 
-Suppose you have a library that you want to provide usage examples for. **detype** can help you generate vanilla JavaScript samples from TypeScript samples automatically and remove the burden of maintaining two separate versions of what is essentially the same code.
+Suppose you have a library that you want to provide usage examples for. **detypes** can help you generate vanilla JavaScript samples from TypeScript samples automatically and remove the burden of maintaining two separate versions of what is essentially the same code.
 
 It is a command line tool and a library that removes type annotations and other TypeScript specific syntax constructs and outputs vanilla JavaScript **without altering the source formatting** too much. It supports `.ts`, `.tsx`, as well as `.vue` files.
 
@@ -51,7 +51,7 @@ The output is very close to hand-written JavaScript, especially if you were alre
 
 There are lots of tools for transpiling TypeScript into plain JavaScript (`tsc`, `babel`, `swc`, `esbuild`, `sucrase` etc.) but none of them is perfectly suitable for this specific use case. Most of them don't preserve the formatting at all. `sucrase` comes close, but it doesn't remove comments attached to TypeScript-only constructs.
 
-`detype` uses [Babel](https://babeljs.io/), a small Babel plugin to remove comments attached to TypeScript-only constructs, and [Prettier](https://prettier.io/) under the hood. For Vue files, it also uses the tools from the [VueDX project](https://github.com/vuedx/languagetools).
+`detypes` uses [Babel](https://babeljs.io/), a small Babel plugin to remove comments attached to TypeScript-only constructs, and [Prettier](https://prettier.io/) under the hood. For Vue files, it also uses the tools from the [VueDX project](https://github.com/vuedx/languagetools).
 
 ## Magic comments
 
@@ -60,13 +60,13 @@ Sometimes you want the generated JavaScript to be slightly different than the Ty
 Input:
 
 ```ts
-// @detype: replace
+// @detypes: replace
 // These two lines will be removed
 console.log("Hello from TypeScript");
-// @detype: with
+// @detypes: with
 // // Notice the double comments!
 // console.log("Hello from JavaScript");
-// @detype: end
+// @detypes: end
 ```
 
 Output:
@@ -85,12 +85,12 @@ console.log("Hello from TypeScript");
 
 ## System requirements
 
-`detype` requires Node version 14.19.3 or later.
+`detypes` requires Node version 14.19.3 or later.
 
 ## CLI Usage
 
 ```
-  detype [-m | --remove-magic-comments] <INPUT> [OUTPUT]
+  detypes [-m | --remove-magic-comments] <INPUT> [OUTPUT]
 
     INPUT   Input file or directory
 
@@ -103,11 +103,11 @@ console.log("Hello from TypeScript");
     -m, --remove-magic-comments
       Remove magic comments only, don't perform ts > js transform
 
-  detype [-v | --version]
+  detypes [-v | --version]
 
     Print version and exit
 
-  detype [-h | --help]
+  detypes [-h | --help]
 
     Print this help and exit
 ```

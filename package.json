@@ -1,5 +1,5 @@
 {
-	"name": "detype",
+	"name": "detypes",
 	"version": "0.6.3",
 	"description": "Removes TypeScript type annotations but keeps the formatting",
 	"main": "dist/index.js",
@@ -49,7 +49,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/cyco130/detype.git"
+		"url": "git+https://github.com/Dunqing/detype.git"
 	},
 	"keywords": [
 		"typescript",
@@ -57,10 +57,10 @@
 		"vue",
 		"sfc"
 	],
-	"author": "Fatih Aygün <cyco130@gmail.com>",
+	"author": "Dunqing <dengqing0821@gmail.com>",
 	"license": "MIT",
 	"bugs": {
-		"url": "https://github.com/cyco130/detype/issues"
+		"url": "https://github.com/Dunqing/detype/issues"
 	},
-	"homepage": "https://github.com/cyco130/detype#readme"
+	"homepage": "https://github.com/Dunqing/detype#readme"
 }
