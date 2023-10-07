@@ -1,6 +1,9 @@
 # detypes
 
-> Remove the types, keep the formatting
+> Fork from https://github.com/cyco130/detype, Since the original author has not processed the PR for a long time, a patch version has been released for the time being until original repo is active again.
+
+[![npm version](https://img.shields.io/npm/v/detypes.svg)](https://www.npmjs.com/package/detypes)
+[![npm downloads](https://img.shields.io/npm/dm/detypes.svg)](https://www.npmjs.com/package/detypes)
 
 ```sh
 npm i -g detypes
