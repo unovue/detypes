@@ -4,8 +4,9 @@
 	"description": "Removes TypeScript type annotations but keeps the formatting",
 	"main": "dist/index.js",
 	"bin": "detype.js",
+	"packageManager": "pnpm@8.8.0",
 	"engines": {
-		"node": ">=14.19.3"
+		"node": ">=18"
 	},
 	"scripts": {
 		"prepack": "rimraf dist && pnpm build",
