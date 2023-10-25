@@ -23,8 +23,8 @@ import MyComponent from "MyComponent.vue";
 import { someConst, otherConst } from "some-module";
 
 const props = defineProps({
-  prop: { type: String, required: true },
-  array: { type: Array, required: true },
+  prop: { type: String, required: true, default: "default" },
+  array: { type: Array, required: true, default: [] },
 });
 
 const emit = defineEmits(["change", "update"]);

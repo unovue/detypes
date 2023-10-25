@@ -117,12 +117,35 @@ export async function transform(
 			[script2, script1] = [script1, script2];
 		}
 
+		const removeVueSfcScriptOptions: Omit<TransformOptions, "prettierOptions"> =
+			{
+				...removeTypeOptions,
+				customizeBabelConfig(config) {
+					config.plugins ||= [];
+					config.plugins?.push({
+						name: "detype-remove-with-defaults",
+						visitor: {
+							CallExpression(path) {
+								const callee = path.get("callee");
+								if (callee.isIdentifier()) {
+									if (callee.node.name === "defineProps") {
+										path.parentPath.replaceWith(path.node);
+										path.parentPath.stop();
+									}
+								}
+							},
+						},
+					});
+					removeTypeOptions.customizeBabelConfig?.(config);
+				},
+			};
+
 		code = await removeTypesFromVueSfcScript(
 			code,
 			fileName,
 			script1,
 			parsedVue.descriptor.template?.ast,
-			removeTypeOptions,
+			removeVueSfcScriptOptions,
 		);
 
 		code = await removeTypesFromVueSfcScript(
@@ -130,7 +153,7 @@ export async function transform(
 			fileName,
 			script2,
 			parsedVue.descriptor.template?.ast,
-			removeTypeOptions,
+			removeVueSfcScriptOptions,
 		);
 	} else {
 		code = await removeTypes(code, fileName, removeTypeOptions);

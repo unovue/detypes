@@ -23,10 +23,16 @@ import MyComponent from "MyComponent.vue";
 import { someConst, otherConst } from "some-module";
 import type { ParsedPath } from "path";
 
-const props = defineProps<{
-  prop: string;
-  array: string[];
-}>();
+const props = withDefaults(
+  defineProps<{
+    prop: string;
+    array: string[];
+  }>(),
+  {
+    prop: "default",
+    array: [],
+  }
+);
 
 const emit = defineEmits<{
   (e: "change", id: number): void;
