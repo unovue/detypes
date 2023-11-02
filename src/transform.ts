@@ -98,13 +98,6 @@ export async function transform(
 			registerTS(() => typescript.default);
 
 			const resolveFile = (file: string) => {
-				console.log(
-					"🚀 ~ file: transform.ts:107 ~ resolveFile ~ file:",
-					// file,
-					file.startsWith("node_modules")
-						? resolve(file)
-						: resolve(isAbsolute(file) ? "" : dirname(fileName), file),
-				);
 				return resolve(
 					isAbsolute(file) || file.startsWith("node_modules")
 						? ""
