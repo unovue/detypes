@@ -99,7 +99,7 @@ export async function transform(
 		const isContainsDefineEmitType = script2?.content.match(/defineEmits\s*</m);
 
 		if (isContainsDefinePropsType || isContainsDefineEmitType) {
-			const typescript = await import('typescript')
+			const typescript = await import("typescript");
 			registerTS(typescript);
 
 			const resolveFile = (file: string) => {
@@ -108,22 +108,23 @@ export async function transform(
 					// file,
 					file.startsWith("node_modules")
 						? resolve(file)
-						: resolve(
-								isAbsolute(file) ? '' : dirname(fileName),
-								 file,
-						  ),
+						: resolve(isAbsolute(file) ? "" : dirname(fileName), file),
 				);
 				return resolve(
-						isAbsolute(file) || file.startsWith("node_modules") ? '' : dirname(fileName),
-						 file,
-					);
+					isAbsolute(file) || file.startsWith("node_modules")
+						? ""
+						: dirname(fileName),
+					file,
+				);
 			};
 
 			const { content } = compileScript(parsedVue.descriptor as any, {
 				id: fileName,
 				fs: {
 					fileExists(file: string) {
-						return !!statSync(resolveFile(file), {throwIfNoEntry: false})?.isFile();
+						return !!statSync(resolveFile(file), {
+							throwIfNoEntry: false,
+						})?.isFile();
 					},
 					readFile: (file: string) => {
 						return readFileSync(resolveFile(file)).toString();
