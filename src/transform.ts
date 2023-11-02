@@ -21,12 +21,7 @@ import type { PrettierOptions } from ".";
 // @ts-expect-error: No typinggs needed
 import babelTs from "@babel/preset-typescript";
 
-// Needed for Node 14
-// @ts-expect-error: No typinggs
-import { shim } from "string.prototype.replaceall";
 import { dirname, isAbsolute, resolve } from "node:path";
-
-shim();
 
 function getDefinePropsObject(content: string) {
 	const matched = /\sprops:\s*\{/m.exec(content);
@@ -100,7 +95,7 @@ export async function transform(
 
 		if (isContainsDefinePropsType || isContainsDefineEmitType) {
 			const typescript = await import("typescript");
-			registerTS(typescript);
+			registerTS(() => typescript.default);
 
 			const resolveFile = (file: string) => {
 				console.log(
