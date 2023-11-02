@@ -25,6 +25,11 @@ import { someConst, otherConst } from "some-module";
 const props = defineProps({
   prop: { type: String, required: true, default: "default" },
   array: { type: Array, required: true, default: [] },
+  name: { type: String, required: true },
+  age: { type: Number, required: true },
+  base: { type: [String, null], required: false },
+  includeAbsolute: { type: Boolean, required: false },
+  tags: { type: Object, required: false },
 });
 
 const emit = defineEmits(["change", "update"]);
