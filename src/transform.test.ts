@@ -29,7 +29,10 @@ describe("transform function", () => {
 	it("transforms Vue file", async () => {
 		const input = await readFile("../test-files/input.vue");
 
-		const output = await transform(input, "input.vue");
+		const output = await transform(
+			input,
+			path.resolve(__dirname, "../test-files/input.vue"),
+		);
 
 		expect(output).toMatchFileSnapshot("../test-files/expected/input.vue");
 	});

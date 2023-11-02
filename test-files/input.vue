@@ -21,13 +21,17 @@ console.log("This is the non-setup script");
 <script lang="ts" setup>
 import MyComponent from "MyComponent.vue";
 import { someConst, otherConst } from "some-module";
-import type { ParsedPath } from "path";
+import type { AssetURLOptions } from "@vue/compiler-sfc";
+import { type Props } from "./types";
 
 const props = withDefaults(
-  defineProps<{
-    prop: string;
-    array: string[];
-  }>(),
+  defineProps<
+    {
+      prop: string;
+      array: string[];
+    } & Props &
+      AssetURLOptions
+  >(),
   {
     prop: "default",
     array: [],

@@ -2,6 +2,7 @@ import {
 	transformAsync,
 	TransformOptions as BabelTransformOptions,
 } from "@babel/core";
+import { readFileSync, statSync } from "node:fs";
 import type { VisitNodeObject, Node } from "@babel/traverse";
 import { format } from "prettier";
 import {
@@ -9,7 +10,7 @@ import {
 	SFCTemplateBlock as VueSfcTemplateBlock,
 	SFCScriptBlock as VueSfcScriptBlock,
 } from "@vuedx/compiler-sfc";
-import { compileScript } from "@vue/compiler-sfc";
+import { compileScript, registerTS } from "@vue/compiler-sfc";
 import {
 	traverse as traverseVueAst,
 	isSimpleExpressionNode as isVueSimpleExpressionNode,
@@ -23,6 +24,8 @@ import babelTs from "@babel/preset-typescript";
 // Needed for Node 14
 // @ts-expect-error: No typinggs
 import { shim } from "string.prototype.replaceall";
+import { dirname, isAbsolute, resolve } from "node:path";
+
 shim();
 
 function getDefinePropsObject(content: string) {
@@ -96,8 +99,36 @@ export async function transform(
 		const isContainsDefineEmitType = script2?.content.match(/defineEmits\s*</m);
 
 		if (isContainsDefinePropsType || isContainsDefineEmitType) {
+			const typescript = await import('typescript')
+			registerTS(typescript);
+
+			const resolveFile = (file: string) => {
+				console.log(
+					"🚀 ~ file: transform.ts:107 ~ resolveFile ~ file:",
+					// file,
+					file.startsWith("node_modules")
+						? resolve(file)
+						: resolve(
+								isAbsolute(file) ? '' : dirname(fileName),
+								 file,
+						  ),
+				);
+				return resolve(
+						isAbsolute(file) || file.startsWith("node_modules") ? '' : dirname(fileName),
+						 file,
+					);
+			};
+
 			const { content } = compileScript(parsedVue.descriptor as any, {
-				id: "xxxxxxx",
+				id: fileName,
+				fs: {
+					fileExists(file: string) {
+						return !!statSync(resolveFile(file), {throwIfNoEntry: false})?.isFile();
+					},
+					readFile: (file: string) => {
+						return readFileSync(resolveFile(file)).toString();
+					},
+				},
 			});
 
 			if (isContainsDefinePropsType) {
