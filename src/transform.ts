@@ -149,8 +149,17 @@ export async function transform(
 								const callee = path.get("callee");
 								if (callee.isIdentifier()) {
 									if (callee.node.name === "defineProps") {
-										path.parentPath.replaceWith(path.node);
-										path.parentPath.stop();
+										const parentPath = path.parentPath;
+										if (parentPath.isCallExpression()) {
+											const callee = parentPath.get("callee");
+											if (
+												callee.isIdentifier() &&
+												callee.node.name === "withDefaults"
+											) {
+												parentPath.replaceWith(path.node);
+												parentPath.stop();
+											}
+										}
 									}
 								}
 							},

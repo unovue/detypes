@@ -37,6 +37,26 @@ describe("transform function", () => {
 		expect(output).toMatchFileSnapshot("../test-files/expected/input.vue");
 	});
 
+	it("transforms vue with defineProps", async () => {
+		const output = await transform(
+			`
+				<script setup lang="ts">
+					const props = defineProps<{ a: string }>()
+				</script>
+			`,
+			"test.vue",
+		);
+
+		expect(output).toMatchInlineSnapshot(`
+			"<script setup>
+			const props = defineProps({
+			  a: { type: String, required: true },
+			});
+			</script>
+			"
+		`);
+	});
+
 	it("processes magic comments", async () => {
 		const input = `// @detype: replace\nconsole.log("Hello from TypeScript");\n// @detype: with\n// console.log("Hello from JavaScript");\n// @detype: end\n`;
 		const output = processMagicComments(input);
