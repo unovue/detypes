@@ -308,17 +308,23 @@ async function removeTypesFromVueSfcScript(
 			enter(node) {
 				let content = "";
 				if (isVueSimpleExpressionNode(node) && !node.isStatic) {
-					const ForOfOrInRE = /\s*(of|in)\s*/;
+					const ForOfOrInRE = /\s+(of|in)\s+/;
 					if (node.content.match(ForOfOrInRE)) {
 						const parts = node.content.split(ForOfOrInRE);
-						content = parts[parts.length - 1];
+						if (parts.length === 3) {
+							content = parts[parts.length - 1];
+						} else {
+							content = node.content;
+						}
 					} else {
 						content = node.content;
 					}
 				} else if (isVueComponentNode(node)) {
 					content = node.tag;
 				}
-				expressions.add(`[${content}]`);
+				if (content) {
+					expressions.add(`[${content}]`);
+				}
 			},
 		});
 
