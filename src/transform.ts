@@ -6,11 +6,11 @@ import { readFileSync, statSync } from "node:fs";
 import type { VisitNodeObject, Node } from "@babel/traverse";
 import { format } from "prettier";
 import {
-	parse as parseVueSfc,
-	SFCTemplateBlock as VueSfcTemplateBlock,
-	SFCScriptBlock as VueSfcScriptBlock,
-} from "@vuedx/compiler-sfc";
-import { compileScript, registerTS } from "@vue/compiler-sfc";
+	compileScript,
+	registerTS,
+	parse,
+	SFCScriptBlock,
+} from "@vue/compiler-sfc";
 import {
 	traverse as traverseVueAst,
 	isSimpleExpressionNode as isVueSimpleExpressionNode,
@@ -22,6 +22,7 @@ import type { PrettierOptions } from ".";
 import babelTs from "@babel/preset-typescript";
 
 import { dirname, isAbsolute, resolve } from "node:path";
+import { RootNode } from "@vue/compiler-dom";
 
 function getDefinePropsObject(content: string) {
 	const matched = /\sprops:\s*\{/m.exec(content);
@@ -41,8 +42,6 @@ function getDefinePropsObject(content: string) {
 	}
 	return "";
 }
-
-type VueElementNode = VueSfcTemplateBlock["ast"];
 
 export interface RemoveTypeOptions {
 	/** Whether to remove ts-ignore and ts-expect-error comments */
@@ -77,7 +76,7 @@ export async function transform(
 	code = code.replaceAll("\r\n", "\n");
 
 	if (fileName.endsWith(".vue")) {
-		const parsedVue = parseVueSfc(code);
+		const parsedVue = parse(code);
 
 		if (
 			parsedVue.descriptor.script?.lang !== "ts" &&
@@ -106,7 +105,7 @@ export async function transform(
 				);
 			};
 
-			const { content } = compileScript(parsedVue.descriptor as any, {
+			const { content } = compileScript(parsedVue.descriptor, {
 				id: fileName,
 				fs: {
 					fileExists(file: string) {
@@ -292,8 +291,8 @@ async function removeTypes(
 async function removeTypesFromVueSfcScript(
 	code: string,
 	fileName: string,
-	script: VueSfcScriptBlock | null,
-	templateAst: VueElementNode | undefined,
+	script: SFCScriptBlock | null,
+	templateAst: RootNode | undefined,
 	options: RemoveTypeOptions,
 ) {
 	if (script === null || script.lang !== "ts") return code;
@@ -304,6 +303,7 @@ async function removeTypesFromVueSfcScript(
 
 		const expressions = new Set<string>();
 
+		// @ts-expect-error different library
 		traverseVueAst(templateAst, {
 			enter(node) {
 				let content = "";
