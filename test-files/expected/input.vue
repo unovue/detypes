@@ -5,6 +5,8 @@
     <div v-bind="{ ...props }" :array="[...arr1]"></div>
     <div v-bind="{ ...props, ...otherProps }" :array="[...arr1, ...arr2]"></div>
     <div v-bind="{ parentProps: props }"></div>
+    <div v-for="_ of props.array">array</div>
+    <div v-for="_ in props.array">array</div>
   </div>
 </template>
 
