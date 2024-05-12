@@ -3,7 +3,7 @@ name: Release
 on:
   push:
     tags:
-      - "v*"
+      - 'v*'
 
 jobs:
   release:
@@ -21,7 +21,7 @@ jobs:
         with:
           node-version: 18.x
           cache: pnpm
-          registry-url: "https://registry.npmjs.org"
+          registry-url: 'https://registry.npmjs.org'
 
       - run: npx changelogithub
         continue-on-error: true
@@ -33,6 +33,9 @@ jobs:
 
       - name: PNPM build
         run: pnpm run build
+      
+      - name: Test
+        run: pnpm run test
 
       - name: Publish to NPM
         run: pnpm -r publish --access public --no-git-checks

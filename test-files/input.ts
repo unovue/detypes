@@ -1,6 +1,4 @@
-import type { ParsedPath } from "path";
-
-let x: string;
+let x: string
 
 // This comment should be kept
 
@@ -8,12 +6,12 @@ let x: string;
 // Ditto for this
 interface Foo {
   // This should go too
-  bar: number;
+  bar: number
 }
 
 // @detype: replace
 // These two lines will be removed
-console.log("Hello from TypeScript");
+console.log('Hello from TypeScript')
 // @detype: with
 // // Notice the double comments!
 // console.log("Hello from JavaScript");
@@ -21,26 +19,26 @@ console.log("Hello from TypeScript");
 
 // @detype: replace
 // These two lines will be removed
-console.log("Hello from TypeScript 2");
+console.log('Hello from TypeScript 2')
 // @detype: with
 // console.log("Hello from JavaScript 2");
 // @detype: end
 
 // This comment should also be kept
 export function bar(foo: Foo): Date {
-  return new Date();
+  return new Date()
 }
 
 const templateLiteral: string = `one
 
 two
-`;
+`
 
-const stringLiteral: string =
-  "one\
+const stringLiteral: string
+  = 'one\
 \
 two\
-";
+'
 
-// @ts-ignore: This should be removed
-const xxx: string = 3;
+// @ts-expect-error: This should be removed
+const xxx: string = 3

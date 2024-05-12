@@ -16,35 +16,35 @@ It is a command line tool and a library that removes type annotations and other 
 In other words, it turns this:
 
 ```ts
-import type { ParsedPath } from "path";
+import type { ParsedPath } from 'node:path'
 
-let x: string;
+let x: string
 
 // This comment should be kept
 
 // This comment should be deleted
 // Ditto for this
 interface Foo {
-	// This should go too
-	bar: number;
+  // This should go too
+  bar: number
 }
 
 // This comment should also be kept
 export function bar(foo: Foo): Date {
-	return new Date();
+  return new Date()
 }
 ```
 
 into this:
 
 ```js
-let x;
+let x
 
 // This comment should be kept
 
 // This comment should also be kept
 export function bar(foo) {
-	return new Date();
+  return new Date()
 }
 ```
 
@@ -65,7 +65,7 @@ Input:
 ```ts
 // @detypes: replace
 // These two lines will be removed
-console.log("Hello from TypeScript");
+console.log('Hello from TypeScript')
 // @detypes: with
 // // Notice the double comments!
 // console.log("Hello from JavaScript");
@@ -76,14 +76,14 @@ Output:
 
 ```js
 // Notice the double comments!
-console.log("Hello from JavaScript");
+console.log('Hello from JavaScript')
 ```
 
 If you just want to remove the magic comments, you can use the `-m` CLI flag or the `removeMagicComments` function to generate uncluttered TypeScript like this:
 
 ```ts
 // These two lines will be removed
-console.log("Hello from TypeScript");
+console.log('Hello from TypeScript')
 ```
 
 ## System requirements
@@ -120,35 +120,35 @@ console.log("Hello from TypeScript");
 ```ts
 // Transform TypeScript code into vanilla JavaScript without affecting the formatting
 function transform(
-	// Source code
-	code: string,
-	// File name for the source
-	fileName: string,
-	// Options to pass to prettier
-	prettierOptions?: PrettierOptions | null,
-): Promise<string>;
+// Source code
+  code: string,
+// File name for the source
+  fileName: string,
+// Options to pass to prettier
+  prettierOptions?: PrettierOptions | null,
+): Promise<string>
 
 // Transform the input file and write the output to another file
 function transformFile(
-	inputFileName: string,
-	outputFileName: string,
-): Promise<void>;
+  inputFileName: string,
+  outputFileName: string,
+): Promise<void>
 
 // Remove magic comments without performing the TS to JS transform
 export function removeMagicComments(
-	// Source code
-	code: string,
-	// File name for the source
-	fileName: string,
-	// Options to pass to prettier
-	prettierOptions?: PrettierOptions | null,
-): string;
+// Source code
+  code: string,
+// File name for the source
+  fileName: string,
+// Options to pass to prettier
+  prettierOptions?: PrettierOptions | null,
+): string
 
 // Remove magic comments from the input file and write the output to another file
 export function removeMagicCommentsFromFile(
-	inputFileName: string,
-	outputFileName: string,
-): Promise<void>;
+  inputFileName: string,
+  outputFileName: string,
+): Promise<void>
 ```
 
 ## Change log
