@@ -214,8 +214,9 @@ export async function transformVue(
       },
     })
 
-    expressionCode = (await removeTypes(expressionCodeList.map(c => `[${c}]`).join('\n;'), `${fileName}.ts`, options))
-    const lines = expressionCode.split('\n')
+    const delimiter = `['---detypes-delimiter---'];`
+    expressionCode = (await removeTypes(expressionCodeList.map(c => `[${c}]`).join(`;${delimiter}`), `${fileName}.ts`, options))
+    const lines = expressionCode.split(delimiter)
     for (let i = 0; i < locs.length; i++) {
       const loc = locs[i]
       const line = lines[i]

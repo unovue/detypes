@@ -7,7 +7,13 @@
     <div v-bind="{ parentProps: props }"></div>
     <div v-for="_ of props.array">array</div>
     <div v-for="_ in props.array">array</div>
-    <VisLine :x="(d, i) => i" :y="(d) => d[category]" />
+    <VisLine
+      :x="(d, i) => i"
+      :y="(d) => d[category]"
+      :triggers="{
+        [selector]: template,
+      }"
+    />
   </div>
 </template>
 

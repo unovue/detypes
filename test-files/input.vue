@@ -10,6 +10,9 @@
     <VisLine
       :x="(d: Data, i: number) => i"
       :y="(d: Data) => d[category]"
+      :triggers="{
+        [selector]: template,
+      }"
    /> 
   </div>
 </template>
