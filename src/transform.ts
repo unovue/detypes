@@ -231,6 +231,9 @@ export async function transformVue(
       script!,
       removeVueSfcScriptOptions,
     )
+    if (script?.attrs.generic)
+      ms.replace(` generic="${script!.attrs.generic}"`, '')
+
     ms.update(script!.loc.start.offset, script!.loc.end.offset, code)
   }
 

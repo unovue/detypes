@@ -23,11 +23,11 @@ p {
 }
 </style>
 
-<script lang="ts">
+<script lang="ts" generic="T">
 console.log("This is the non-setup script");
 </script>
 
-<script lang="ts" setup>
+<script lang="ts" setup generic="T extends Record<string, any>">
 import MyComponent from "MyComponent.vue";
 import { someConst, otherConst } from "some-module";
 import type { AssetURLOptions } from "@vue/compiler-sfc";
