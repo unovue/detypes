@@ -27,6 +27,11 @@
     }
   },
   "bin": "detype.js",
+  "files": [
+    "README.md",
+    "detype.js",
+    "dist"
+  ],
   "engines": {
     "node": ">=18"
   },
