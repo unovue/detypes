@@ -1,7 +1,7 @@
 {
   "name": "detypes",
   "version": "0.8.0",
-  "packageManager": "pnpm@9.1.0",
+  "packageManager": "pnpm@9.5.0",
   "description": "Removes TypeScript type annotations but keeps the formatting",
   "author": "Dunqing <dengqing0821@gmail.com>",
   "license": "MIT",
@@ -26,11 +26,11 @@
       "require": "./dist/index.js"
     }
   },
+  "main": "dist/index.js",
   "bin": "detype.js",
   "files": [
-    "README.md",
-    "detype.js",
-    "dist"
+    "dist/**/*",
+    "index.d.ts"
   ],
   "engines": {
     "node": ">=18"

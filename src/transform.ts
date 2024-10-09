@@ -219,7 +219,7 @@ export async function transformVue(
     const lines = expressionCode.split(delimiter)
     for (let i = 0; i < locs.length; i++) {
       const loc = locs[i]
-      const line = lines[i]
+      const line = lines[i].trim()
       ms.update(loc[0], loc[1], line.substring(1, line.length - 2))
     }
   }
