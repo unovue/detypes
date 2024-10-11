@@ -1,6 +1,6 @@
 {
   "name": "@unovue/detypes",
-  "version": "0.8.3",
+  "version": "0.8.4",
   "packageManager": "pnpm@9.5.0",
   "description": "Removes TypeScript type annotations but keeps the formatting",
   "author": "Zernonia <zernonia@gmail.com>",
