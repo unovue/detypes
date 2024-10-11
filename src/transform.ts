@@ -1,4 +1,4 @@
-import { readFileSync, statSync } from 'node:fs'
+import { existsSync, readFileSync, statSync } from 'node:fs'
 import { dirname, isAbsolute, resolve } from 'node:path'
 import type {
   TransformOptions as BabelTransformOptions,
@@ -128,6 +128,10 @@ export async function transformVue(
       id: fileName,
       fs: {
         fileExists(file: string) {
+          const resolvedFile = resolveFile(file)
+          if (!existsSync(resolvedFile))
+            return false // File doesn't exist
+
           return !!statSync(resolveFile(file), {
             throwIfNoEntry: false,
           })?.isFile()
