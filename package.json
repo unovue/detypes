@@ -1,17 +1,17 @@
 {
-  "name": "detypes",
-  "version": "0.8.0",
+  "name": "@unovue/detypes",
+  "version": "0.8.1",
   "packageManager": "pnpm@9.5.0",
   "description": "Removes TypeScript type annotations but keeps the formatting",
-  "author": "Dunqing <dengqing0821@gmail.com>",
+  "author": "Zernonia <zernonia@gmail.com>",
   "license": "MIT",
-  "homepage": "https://github.com/Dunqing/detype#readme",
+  "homepage": "https://github.com/unovue/detypes#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Dunqing/detype.git"
+    "url": "git+https://github.com/unovue/detypes.git"
   },
   "bugs": {
-    "url": "https://github.com/Dunqing/detype/issues"
+    "url": "https://github.com/unovue/detypes/issues"
   },
   "keywords": [
     "typescript",

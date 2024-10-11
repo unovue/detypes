@@ -1,12 +1,12 @@
 # detypes
 
-> Fork from https://github.com/cyco130/detype, Since the original author has not processed the PR for a long time, a patch version has been released for the time being until original repo is active again.
+> Fork from https://github.com/Dunqing/detype, which is a fork from https://github.com/cyco130/detype. Since the original author has not processed the PR for a long time, a patch version has been released for the time being until original repo is active again.
 
 [![npm version](https://img.shields.io/npm/v/detypes.svg)](https://www.npmjs.com/package/detypes)
 [![npm downloads](https://img.shields.io/npm/dm/detypes.svg)](https://www.npmjs.com/package/detypes)
 
 ```sh
-npm i -g detypes
+npm i -g @unovue/detypes
 ```
 
 Suppose you have a library that you want to provide usage examples for. **detypes** can help you generate vanilla JavaScript samples from TypeScript samples automatically and remove the burden of maintaining two separate versions of what is essentially the same code.
@@ -184,4 +184,4 @@ export function removeMagicCommentsFromFile(
 
 ## Credits
 
-Fatih Aygün, under MIT License
+Dunqing, Fatih Aygün, under MIT License
