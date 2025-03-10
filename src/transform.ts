@@ -91,7 +91,7 @@ export async function transformVue(
   fileName: string,
   options: TransformOptions = {},
 ) {
-  const parsedVue = parse(code)
+  const parsedVue = parse(code, { filename: fileName })
 
   if (
     parsedVue.descriptor.script?.lang !== 'ts'
@@ -123,7 +123,7 @@ export async function transformVue(
         file,
       )
     }
-
+ 
     const { content } = compileScript(parsedVue.descriptor, {
       id: fileName,
       fs: {
