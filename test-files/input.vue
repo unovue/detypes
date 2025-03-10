@@ -31,7 +31,7 @@ console.log("This is the non-setup script");
 import MyComponent from "MyComponent.vue";
 import { someConst, otherConst } from "some-module";
 import type { AssetURLOptions } from "@vue/compiler-sfc";
-import { type Props } from "./types";
+import { type Props } from "@/types";
 
 const props = withDefaults(
   defineProps<
