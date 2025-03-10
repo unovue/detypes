@@ -123,7 +123,7 @@ export async function transformVue(
         file,
       )
     }
- 
+
     const { content } = compileScript(parsedVue.descriptor, {
       id: fileName,
       fs: {
